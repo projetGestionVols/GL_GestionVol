@@ -1,5 +1,6 @@
 package vue;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -63,6 +64,7 @@ public class VolForm extends JDialog {
     private JButton           btnFermer;
     private boolean           succeeded;
     private Vol               vol;
+    // private JPanel panelInput;
 
     public VolForm( Frame parent ) {
         super( parent, "Vol", true );
@@ -185,7 +187,7 @@ public class VolForm extends JDialog {
         panel.add( lbarrive );
         panel.add( cmarrive );
         panel.setBorder( new LineBorder( Color.GRAY ) );
-        btnValider = new JButton( "Validers" );
+        btnValider = new JButton( "Valider" );
 
         btnValider.addActionListener( new ActionListener() {
 

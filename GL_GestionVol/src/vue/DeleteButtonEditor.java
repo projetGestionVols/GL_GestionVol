@@ -1,6 +1,5 @@
 package vue;
 
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +11,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
 import traitement.TraitementAvion;
+import traitement.gestionVol;
 
 //CTRL + SHIFT + O pour générer les imports
 public class DeleteButtonEditor extends DefaultCellEditor {
@@ -60,9 +60,12 @@ public class DeleteButtonEditor extends DefaultCellEditor {
                 int order = table.getSelectedRow();
                 int id = (int) table.getModel().getValueAt( order, 0 );
                 TraitementAvion traitementAvion;
+                gestionVol gestionvol;
                 try {
                     traitementAvion = new TraitementAvion();
                     traitementAvion.suppAvion( id );
+                    gestionvol = new gestionVol();
+                    gestionvol.supprimerVol( id );
 
                 } catch ( ClassNotFoundException | SQLException e ) {
                     // TODO Auto-generated catch block

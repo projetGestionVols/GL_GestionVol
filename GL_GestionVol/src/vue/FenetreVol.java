@@ -20,19 +20,14 @@ public class FenetreVol extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JTable            tableau;
-    private JButton           change           = new JButton( "Changer la taille" );
-    // private String[] comboData = { "Très bien", "Bien", "Mal" };
     private String            supp             = "Supprimer la ligne";
-    // private String modif = "Modifier une ligne";
-    // private JComboBox combo;
-
     VolForm                   volForm;
 
     public FenetreVol() throws ClassNotFoundException, SQLException {
         volForm = new VolForm( this );
         this.setLocationRelativeTo( null );
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        this.setTitle( "JTable" );
+        this.setTitle( "Liste des vols" );
         this.setSize( 600, 250 );
         this.createContent();
     }
@@ -41,7 +36,7 @@ public class FenetreVol extends JFrame {
 
         gestionVol gestionvol = new gestionVol();
         List<Vol> list = gestionvol.getAllVol();
-        Object[][] data = new Object[list.size()][12];
+        Object[][] data = new Object[list.size()][11];
 
         System.out.println( list.toString() );
 
@@ -53,16 +48,16 @@ public class FenetreVol extends JFrame {
             data[i][3] = row.getArr();
             data[i][4] = row.getDateDepart();
             data[i][5] = row.getDateArrivee();
-            data[i][6] = row.getDateArrivee();
-            data[i][7] = row.getHeureDepart();
-            data[i][8] = row.getHeureArrivee();
-            data[i][9] = row.getPrix();
-            data[i][10] = row.getNbplace();
-            data[i][11] = supp;
+            data[i][6] = row.getHeureDepart();
+            data[i][7] = row.getHeureArrivee();
+            data[i][8] = row.getPrix();
+            data[i][9] = row.getNbplace();
+            data[i][10] = supp;
 
         }
 
-        String title[] = { "ID", "Avion", "Date départ", "Date arrivée", "Heure départ", "Heure arrivéé", "prix",
+        String title[] = { "ID", "Avion", "Aéoroport de départ", "Aéoroport d'arrivé", "Date départ", "Date arrivée",
+                "Heure départ", "Heure arrivéé", "prix",
                 "nombre places", "Suppression" };
         ZModel zModel = new ZModel( data, title );
 
@@ -83,10 +78,10 @@ public class FenetreVol extends JFrame {
         public void actionPerformed( ActionEvent event ) {
             volForm.setVisible( true );
             Vol vol = volForm.getVol();
-            System.out.println( vol );
-            Object[] donnee = new Object[] { vol.getIdVol(), vol.getAvion(),
-                    vol.getDateDepart(), vol.getDateArrivee(), vol.getHeureDepart(), vol.getHeureArrivee(),
-                    vol.getPrix(), vol.getNbplace(), supp };
+            // System.out.println( avion );
+            Object[] donnee = new Object[] { vol.getIdVol(), vol.getAvion(), vol.getDepart(), vol.getArr(),
+                    vol.getDateDepart(), vol.getDateArrivee(),
+                    vol.getHeureDepart(), vol.getHeureArrivee(), vol.getPrix(), vol.getNbplace(), supp };
             ( (ZModel) tableau.getModel() ).addRow( donnee );
         }
     }

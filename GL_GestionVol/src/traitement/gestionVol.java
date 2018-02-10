@@ -1,5 +1,6 @@
 package traitement;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -143,6 +144,20 @@ public class gestionVol {
         }
     }
 
+    public void supprimerVol( int idVol ) {
+
+        try {
+
+            PreparedStatement pr = (PreparedStatement) cnx.getCn().prepareStatement( "delete from vol  WHERE idVol=?" );
+            pr.setInt( 1, idVol );
+            pr.execute();
+            pr.close();
+
+        } catch ( Exception e ) {
+
+        }
+    }
+
     /**
      * rechercher un element
      * 
@@ -212,7 +227,7 @@ public class gestionVol {
         List<Vol> list = null;
         try {
             java.util.Date aujourdhui = null;
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "yyyy-MM-dd" );
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat( "dd-MM-yyyy" );
             aujourdhui = simpleDateFormat.parse( d );
 
             try {
@@ -222,7 +237,7 @@ public class gestionVol {
                 pr.setInt( 2, dep );
                 pr.setInt( 3, arr );
                 ResultSet rs = pr.executeQuery();
-       
+                int i = 0;
                 list = new ArrayList<Vol>();
                 while ( rs.next() ) {
                     Vol v = new Vol();
@@ -235,7 +250,7 @@ public class gestionVol {
                     v.setHeureArrivee( rs.getString( "heureArrivee" ) );
                     v.setPrix( rs.getDouble( "prix" ) );
                     v.setNbplace( rs.getInt( "nbplace" ) );
-                    list.add(v);
+
                 }
 
             } catch ( Exception e ) {
